@@ -1,23 +1,29 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { UsersModule } from './users/users.module';
 
 @Module({
     controllers: [AppController],
     providers: [AppService],
-    // be careful with the dg ports
+    // be careful with the db ports
     imports: [
+        ConfigModule.forRoot({
+            envFilePath: '.env'
+        }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
-            host: 'localhost',
-            port: 8080,
-            username: 'postgres',
-            password: 'admin',
-            database: 'nest-test',
+            host: process.env.POSTGRES_HOST,
+            port: Number(process.env.POSTGRES_PORT),
+            username: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
+            database: process.env.POSTGRES_DB,
             models: [],
             autoLoadModels: true
           }),
+        UsersModule,
     ]
 })
 export class AppModule {}
