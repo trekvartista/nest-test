@@ -4,7 +4,7 @@ import { User } from "src/users/users.model";
 import { RolesController } from "./roles.controller";
 import { Role } from "./roles.model";
 import { RolesService } from "./roles.service";
-import { UserRoles } from "./user-roles";
+import { UserRoles } from "./user-roles.model";
 
 @Module({
     providers: [RolesService],
