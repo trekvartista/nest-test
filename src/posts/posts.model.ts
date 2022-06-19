@@ -4,7 +4,9 @@ import { User } from "src/users/users.model";
 
 interface PostCreationAttributes {
     title: string;
-    description: string;
+    content: string;
+    image: string;
+    userId: number;
 }
 
 @Table({ tableName: "posts" })
@@ -29,7 +31,7 @@ export class Post extends Model<Post, PostCreationAttributes> {
 
     @ApiProperty({example: 'https://media.sproutsocial.com/uploads/2017/01/Instagram-Post-Ideas.png', description: 'Post image Url'})
     @Column({type: DataType.STRING})
-    imageUrl: string
+    image: string
 
     @ApiProperty({example: 5, description: 'Unique userId of the Author'})
     @Column({type: DataType.INTEGER})
